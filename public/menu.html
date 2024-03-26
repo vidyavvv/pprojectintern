@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    
+@media only screen and(max-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column-reverse; /* Reverses the order of container and cart on smaller devices */
+  }
+  header {
+    position: fixed; /* Fix the header position */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999; /* Set a high z-index to ensure it's above other content */
+    background-color: #1C1F25;
+  }
+  #menu {
+    margin-top: 70px; /* Adjust the margin top to prevent overlap with the fixed header */
+  }
+  #cartIcon {
+    position: fixed;
+    bottom: 20px; /* Adjust the position of the cart icon as needed */
+    right: 20px; /* Adjust the position of the cart icon as needed */
+    z-index: 9999;
+  }
+
+  #cart {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left:0;
+    width: 100%;
+    max-width: 100%;
+    z-index: 9999;
+    background-color: #1C1F25;
+    display: none; /* Initially hide the cart on smaller devices */
+  }
+}
+@media only screen and (max-width: 400px) {
+  header {
+    position: static; 
+  }
+  #menu {
+    margin-top: 20px; 
+  }
+}
+    
+    
+    .active .card {
+      left: calc(100% - 500px);
+    }
+
+    .active .container {
+      /* transform: translateX(-200px); */
+      transform: none;
+    }
+    .active #cart {
+        display: block; /* Display the cart when active on smaller devices */
+      }
+
+    .card h1 {
+      color: hsl(38, 61%, 73%);
+      font-weight: 100;
+      margin: 0;
+      padding: 0 20px;
+      height: 160px;
+      display: flex;
+      align-items: center;
+    }
+
+    .card .checkOut {
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+
+    }
+
+    .card .checkOut div {
+      background-color: hsl(38, 61%, 73%);
+      width: 100%;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .listCart .item img {
+      width: 100%;
+    }
+
+    .listCart .item {
+      display: grid;
+      grid-template-columns: 70px 150px 50px 1fr;
+      gap: 10px;
+      text-align: center;
+      align-items: center;
+    }
+
+    .listCart .quantity span {
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      background-color: #eee;
+      border-radius: 50%;
+      color: #555;
+      cursor: pointer;
+    }
+
+    .card .checkOut div:nth-child(4) {
+      background-color: #1C1F25;
+      color: #fff;
+    }
+
+    .listCard li {
+      display: grid;
+      grid-template-columns: 100px repeat(3, 1fr);
+      color: #fff;
+      row-gap: 10px;
+    }
+
+    .listCard li div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .listCard li img {
+      width: 90%;
+    }
+
+    .listCard li {
+      position: relative;
+    }
+
+    .listCard li::before {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      content: '';
+      background-color: #94817733;
+      z-index: -1;
+      border-radius: 190px 100px 170px 180px;
+      left: calc(50% - 150px);
+      top: 50px;
+
+    }
+
+    .listCard li button {
+      background-color: #fff5;
+      border: none;
+    }
+
+    .listCard .count {
+      margin: 0 10px;
+    }
+  </style>
+</head>
+
+<body class=" " style="overflow:overlay; width: 100%;">
+
+  <div class="container" style="background-color: #1C1F25; ">
+    <header>
+
+      <div class="shopping" style="position: relative;">
+        <img id="cartIcon" src="image\cart-34-16.png" style="width: 40px;
+                float: right;
+                 margin-right: 15px;">
+        <span class="quantity" style="background: white;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: black;
+                position: absolute;
+                top: -7px;
+                left: 97%;
+                padding: 3px 10px;">0</span>
+      </div>
+    </header>
+    <section class="section menu" aria-label="menu-label" id="menu">
+      <div class="container">
+
+        <p class="section-subtitle text-center label-2">Special Selection</p>
+
+        <h2 class="headline-1 section-title text-center">Delicious Menu</h2>
+
+        <ul class="list">
+
+        </ul>
+        
+      </div>
+    </section>
+      <div id="cart" class="card">
+        <h1 style="padding: 20px;
+        margin: 0;
+        font-weight: 300;">Cart</h1>
+        <ul class="listCard">
+        </ul>
+        <div class="checkOut">
+          <div>Total:</div>
+          <div class="total">0</div>
+          <a href="addressform.html">
+            <div style="background-color: black">Checkout</div>
+          </a>
+          <div class="closeShopping" onclick="toggleCart()">Close</div>
+        </div>
+      </div>
+  </div>
+
+
+
+
+
+
+  <!-- 
+    - #FOOTER
+  -->
+
+  <footer class="footer section has-bg-image text-center" style="background-image: url('images/footer-bg.jpg')">
+    <div class="container">
+
+      <div class="footer-top grid-list">
+
+        <div class="footer-brand has-before has-after">
+
+          <a href="#" class="logo">
+            <img src="images/logo.svg" width="160" height="50" loading="lazy" alt="IGNYT - The Beer Station">
+          </a>
+
+          <address class="body-4">
+            Kumaraswamy Layout, Bangalore
+          </address>
+
+          <a href="tel:+918217779517" class="body-4 contact-link">Booking Request : +91 82177 79517</a>
+
+          <p class="body-4">
+            Open : 09:00 am - 01:00 pm
+          </p>
+
+          <div class="wrapper">
+            <div class="separator"></div>
+            <div class="separator"></div>
+            <div class="separator"></div>
+          </div>
+
+          <p class="title-1">Get News & Offers</p>
+
+          <p class="label-1">
+            Subscribe us & Get <span class="span">25% Off.</span>
+          </p>
+
+          <form action="" class="input-wrapper">
+            <div class="icon-wrapper">
+              <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
+
+              <input type="email" name="email_address" placeholder="Your email" autocomplete="off" class="input-field">
+            </div>
+
+
+
+            <button type="submit" class="btn btn-secondary" style="position: absolute;
+            position: relative;
+    top: -300;
+    right: 0;
+    bottom: 0;
+    min-width: max-content;">
+              <span class="text text-1">Subscribe</span>
+
+              <span class="text text-2" aria-hidden="true">Subscribe</span>
+            </button>
+          </form>
+
+        </div>
+
+        <ul class="footer-list">
+
+          <li>
+            <a href="index.html" class="label-2 footer-link hover-underline">Home</a>
+          </li>
+
+          <li>
+            <a href="#" class="label-2 footer-link hover-underline">Menus</a>
+          </li>
+
+        </ul>
+
+        <ul class="footer-list">
+
+          <li>
+            <a href="https://www.instagram.com/ignyt_thebeerstation/?hl=en" target="_blank"
+              class="label-2 footer-link hover-underline">Instagram</a>
+          </li>
+
+          <li>
+            <a href="https://www.google.com/maps/dir/13.1358023,77.5734042/12.9076004,77.5639731/@13.0217003,77.4670944,12z/data=!3m1!4b1!4m4!4m3!1m1!4e1!1m0?entry=ttu"
+              target="_blank" class="label-2 footer-link hover-underline">Google Map</a>
+          </li>
+
+        </ul>
+
+      </div>
+
+      <div class="footer-bottom">
+
+        <p class="copyright">
+          &copy; 2024 IGNYT - The Beer Station. All Rights Reserved
+        </p>
+
+      </div>
+
+    </div>
+  </footer>
+
+
+
+
+
+  <!-- 
+    - #BACK TO TOP
+  -->
+
+  <!-- <a href="#top" class="back-top-btn active" aria-label="back to top" data-back-top-btn>
+    <ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
+  </a> -->
+
+
+
+
+
+  <!-- 
+    - custom js link
+  -->
+  <script src="script.js"></script>
+<script>
+    var cartOpen = false;
+
+function toggleCart() {
+  var cart = document.getElementById('cart');
+  cartOpen = !cartOpen;
+  if (cartOpen) {
+    cart.style.display = 'block';
+  } else {
+    cart.style.display = 'none';
+  }
+}
+
+// Open the cart only if the cart icon is clicked
+document.getElementById('cartIcon').addEventListener('click', toggleCart);
+</script>
+
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="app.js">
+
+    localStorage.setItem('q', total.innerText);
+    window.location.href = "addressform.html";
+  </script>
+
+</body>
+
+</html>
